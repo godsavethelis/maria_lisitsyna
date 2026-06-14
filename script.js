@@ -290,6 +290,15 @@
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
 
+    // assemble email at runtime (keeps it out of the raw HTML, defeats spam scrapers)
+    var em = document.querySelector('.contact__email');
+    if (em) {
+      var addr = em.getAttribute('data-u') + '@' + em.getAttribute('data-d');
+      em.setAttribute('href', 'mailto:' + addr);
+      em.textContent = addr;
+      em.style.cursor = 'pointer';
+    }
+
     var nav = document.getElementById('nav');
     function navOnScroll() {
       var heroH = (document.querySelector('.hero') || {}).offsetHeight || window.innerHeight;
